@@ -6,26 +6,25 @@ import pages.UserOrderForm;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import static org.hamcrest.CoreMatchers.startsWith;
-import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ScooterOrder {
+public class ScooterOrder extends BaseTest {
 
-    private WebDriver driver;
     private String expectedTextSuccessfulOrder = "Заказ оформлен";
+    public By orderButtonLocator = By.cssSelector("#root > div > div > div.Home_ThirdPart__LSTEE > div.Home_RoadMap__2tal_ > div.Home_FinishButton__1_cWm > button");
+    public String scrollIntoView = "arguments[0].scrollIntoView();";
 
     @Test
-    public void firstOrder() {
+    public void orderScooterByTopButton() {
 
         driver = new ChromeDriver();
 
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.get(URL);
 
         StartPage objectStartPage = new StartPage(driver);
         UserOrderForm objectUserOrderForm = new UserOrderForm(driver);
@@ -34,10 +33,10 @@ public class ScooterOrder {
 
         objectStartPage.clickCookieButton();
         objectStartPage.clickTopButtonOfOrder();
-        objectUserOrderForm.setName("Алексей");
-        objectUserOrderForm.setSurname("Иванов");
-        objectUserOrderForm.setAddress("Победы 10");
-        objectUserOrderForm.setPhone("+79112345678");
+        objectUserOrderForm.setName(name1);
+        objectUserOrderForm.setSurname(surname1);
+        objectUserOrderForm.setAddress(address1);
+        objectUserOrderForm.setPhone(phone1);
         objectUserOrderForm.onClickListOfMetro();
         objectUserOrderForm.onClickStation();
         objectUserOrderForm.onDone();
@@ -49,15 +48,14 @@ public class ScooterOrder {
         objectRentForm.onDoneModal();
         String actualTextSuccessfulOrder = objectAcceptWindow.getTitleAcceptModel();
         MatcherAssert.assertThat(actualTextSuccessfulOrder, startsWith(expectedTextSuccessfulOrder));
-        System.out.println(actualTextSuccessfulOrder);
     }
 
     @Test
-    public void secondOrder() {
+    public void orderScooterByBottomButton() {
 
         driver = new ChromeDriver();
 
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.get(URL);
 
         StartPage objectStartPage = new StartPage(driver);
         UserOrderForm objectUserOrderForm = new UserOrderForm(driver);
@@ -67,15 +65,15 @@ public class ScooterOrder {
         objectStartPage.clickCookieButton();
 
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#root > div > div > div.Home_ThirdPart__LSTEE > div.Home_RoadMap__2tal_ > div.Home_FinishButton__1_cWm > button")));
-        WebElement element = driver.findElement(By.cssSelector("#root > div > div > div.Home_ThirdPart__LSTEE > div.Home_RoadMap__2tal_ > div.Home_FinishButton__1_cWm > button"));
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+                .until(ExpectedConditions.visibilityOfElementLocated(orderButtonLocator));
+        WebElement element = driver.findElement(orderButtonLocator);
+        ((JavascriptExecutor) driver).executeScript(scrollIntoView, element);
 
         objectStartPage.clickBottomButtonOfOrder();
-        objectUserOrderForm.setName("Анастасия");
-        objectUserOrderForm.setSurname("Петрова");
-        objectUserOrderForm.setAddress("Лесная 5");
-        objectUserOrderForm.setPhone("+79312345678");
+        objectUserOrderForm.setName(name2);
+        objectUserOrderForm.setSurname(surname2);
+        objectUserOrderForm.setAddress(address2);
+        objectUserOrderForm.setPhone(phone2);
         objectUserOrderForm.onClickListOfMetro();
         objectUserOrderForm.onClickStation();
         objectUserOrderForm.onDone();
@@ -87,11 +85,5 @@ public class ScooterOrder {
         objectRentForm.onDoneModal();
         String actualTextSuccessfulOrder = objectAcceptWindow.getTitleAcceptModel();
         MatcherAssert.assertThat(actualTextSuccessfulOrder, startsWith(expectedTextSuccessfulOrder));
-        System.out.println(actualTextSuccessfulOrder);
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
     }
 }

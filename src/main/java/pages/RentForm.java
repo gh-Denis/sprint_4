@@ -9,31 +9,28 @@ public class RentForm {
     }
 
     private By date = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
+    private By calendar = By.cssSelector(".react-datepicker__day--012");
+    private By listPeriod = By.cssSelector(".Dropdown-placeholder");
+    private By period = By.xpath(".//div[text()='трое суток']");
+    private By done = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']");
+    private By doneModal = By.xpath(".//button[text()='Да' and @class='Button_Button__ra12g Button_Middle__1CSJM']");
+
+
     public void onClickDate() {
         driver.findElement(date).click();
     }
-
-    private By calendar = By.cssSelector(".react-datepicker__day--012");
     public void onClickCalendar() {
         driver.findElement(calendar).click();
     }
-
-    private By listPeriod = By.cssSelector(".Dropdown-placeholder");
     public void onClickListPeriod() {
         driver.findElement(listPeriod).click();
     }
-
-    private By period = By.xpath(".//div[text()='трое суток']");
     public void onClickPeriod() {
         driver.findElement(period).click();
     }
-
-    private By done = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']");
     public void onDone() {
         driver.findElement(done).click();
     }
-
-    private By doneModal = By.xpath(".//button[text()='Да' and @class='Button_Button__ra12g Button_Middle__1CSJM']");
     public void onDoneModal() {
         driver.findElement(doneModal).click();
     }
