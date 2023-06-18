@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 
 public class BaseTest {
     static String URL = ("https://qa-scooter.praktikum-services.ru/");
-    static String TOPORDERBUTTON = ".//button[@class='Button_Button__ra12g' and text()='Заказать']";
-    static String BOTTOMORDERBUTTON = ".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']";
 
     protected WebDriver driver;
     @Before

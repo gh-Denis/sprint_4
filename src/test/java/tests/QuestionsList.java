@@ -1,11 +1,10 @@
 package tests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.Test;
 import pages.StartPage;
-import java.util.concurrent.TimeUnit;
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
@@ -39,8 +38,7 @@ public class QuestionsList extends BaseTest {
         driver.get(URL);
         objectStartPage.clickCookieButton();
         objectStartPage.clickQuestion(questionNumber);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(By.tagName("p"));
+        objectStartPage.waitForAnswerAppear();
         String actualAnswerText = objectStartPage.getAnswerText(questionNumber);
         assertEquals(rightAnswer, actualAnswerText);
     }
