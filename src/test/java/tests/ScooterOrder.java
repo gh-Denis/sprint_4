@@ -1,15 +1,12 @@
 package tests;
-
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import pages.SecondOrderPage;
 import pages.FirstOrderPage;
 import org.hamcrest.MatcherAssert;
-import org.openqa.selenium.By;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.StartPage;
-
 import static org.hamcrest.CoreMatchers.containsString;
 
 @RunWith(Parameterized.class)
@@ -49,7 +46,7 @@ public class ScooterOrder extends BaseTest {
         StartPage objectStartPage = new StartPage(driver);
         driver.get(URL);
         objectStartPage.clickCookieButton();
-        driver.findElement(By.xpath(objectStartPage.getButtonLocator(orderButtonLocator))).click();
+        objectStartPage.order(orderButtonLocator);
         FirstOrderPage firstOrderPage = new FirstOrderPage(driver);
         firstOrderPage.fillFirstPage(name, surname, address, metroStation, phoneNumber);
         firstOrderPage.onClickNextButton();

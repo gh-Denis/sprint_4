@@ -1,7 +1,6 @@
 package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import java.util.concurrent.TimeUnit;
 
 public class StartPage {
@@ -12,10 +11,22 @@ public class StartPage {
     }
 
     private By cookieButton = By.id("rcc-confirm-button");
+    private By topOrderButton = By.xpath(".//button[@class='Button_Button__ra12g' and text()='Заказать']");
+    private By bottomOrderButton = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']");
 
     public void clickCookieButton() {
         driver.findElement(cookieButton).click();
     }
+    public void onOrderButtonClick(By button) {
+        driver.findElement(button).click();
+    }
+    public void order(boolean isUpButton) {
+        if (isUpButton)
+            onOrderButtonClick(topOrderButton);
+        else
+            onOrderButtonClick(bottomOrderButton);
+    }
+
     public void clickQuestion(int questionNumber) {
         driver.findElement(By.id("accordion__heading-" + questionNumber)).click();
     }
@@ -24,12 +35,5 @@ public class StartPage {
     }
     public void waitForAnswerAppear() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    }
-
-    public String getButtonLocator(boolean isUpButton) {
-        if (isUpButton)
-            return ".//button[@class='Button_Button__ra12g' and text()='Заказать']";
-        else
-            return ".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']";
     }
 }

@@ -4,7 +4,6 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.Test;
 import pages.StartPage;
-
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
