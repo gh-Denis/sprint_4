@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 @RunWith(Parameterized.class)
 public class ScooterOrder extends BaseTest {
 
-    private final Boolean orderButtonLocator;
+    private final Boolean chooseOrderButton;
     private final String name;
     private final String surname;
     private final String address;
@@ -21,8 +21,8 @@ public class ScooterOrder extends BaseTest {
     private final String date;
     private final String orderComment;
 
-    public ScooterOrder(Boolean orderButtonLocator, String name, String surname, String address, String metroStation, String phoneNumber, String date, String orderComment) {
-        this.orderButtonLocator = orderButtonLocator;
+    public ScooterOrder(Boolean chooseOrderButton, String name, String surname, String address, String metroStation, String phoneNumber, String date, String orderComment) {
+        this.chooseOrderButton = chooseOrderButton;
         this.name = name;
         this.surname = surname;
         this.address = address;
@@ -46,7 +46,7 @@ public class ScooterOrder extends BaseTest {
         StartPage objectStartPage = new StartPage(driver);
         driver.get(URL);
         objectStartPage.clickCookieButton();
-        objectStartPage.order(orderButtonLocator);
+        objectStartPage.clickOrderButton(chooseOrderButton);
         FirstOrderPage firstOrderPage = new FirstOrderPage(driver);
         firstOrderPage.fillFirstPage(name, surname, address, metroStation, phoneNumber);
         firstOrderPage.onClickNextButton();

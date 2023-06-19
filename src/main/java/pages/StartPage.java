@@ -20,7 +20,7 @@ public class StartPage {
     public void onOrderButtonClick(By button) {
         driver.findElement(button).click();
     }
-    public void order(boolean isUpButton) {
+    public void clickOrderButton(boolean isUpButton) {
         if (isUpButton)
             onOrderButtonClick(topOrderButton);
         else
